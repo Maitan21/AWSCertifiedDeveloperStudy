@@ -148,6 +148,8 @@
 ## AWS S3
 ### Storage Classes
 1. S3 Standard
+    - low latency를 제공하는 서비스에 적절x
+    - 일반적인 disaster revoer 또는 백업
 2.  S3 Infrequently Accesed
     - 자주 접근되지 않지만, 가끔 필요할 때는 빠른 속도로 검색하는 경우를 위한 S3
     - S3 Standard 보다 가격이 저렴하지만, retrieval fee(검색 비용)이 따로 요구됨
@@ -168,6 +170,9 @@
 6. S3 Glacier
   - 장기적인 백업 전용
   - 높은 durability(내구성)
+  - Expedited retrievlas (1 to 5 minutes retrieval)
+  - Standard (3 to 5 hours)
+  - Bulk (5 to 12 hours)
 7. S3 versioning (버전 관리)
    - 의도치 않은 사용자 작업과 응용 프로그램 오류 모두에서 쉽게 복구 가능
    - 활성화 시 S3 가 동일한 객체에 대해 여러 쓰기 요청을 동시에 수신하면 모든 객체를 저장
@@ -234,6 +239,10 @@
 - NoSQL 데이터베이스 서비스로 확장성과 빠르고 예측 가능한 성능을 제공
 - 데이터 규모와 관계없이 데이터를 저장 및 검색하고, 어떤 수준의 요청 트래픽이라도 처리할 수 있는 데이터베이스 테이블을 생성할 수 있음.
 - 문서 모델과 Key-Value 스토어 모델을 지원하는 NoSQL데이터베이스
+
+- DynamoDB Transactions
+    - 단일 계정 및 리전 내 하나 이상의 테이블에서 원자성, 일관성, `격리`및 내구성을 제공
+    - 주문 이행 및 관리, 분산 된 구성 요소 및 서비스에 대한 작업 조정
 
 ## Redshift
 - 기존 비즈니스 인텔리전스 도구를 사용하여 모든 데이터를 간단하고 비용 효율적으로 분석할 수 있도록 지원하는 페타바이트 규모의 빠른 완전관리형 데이터 웨어하우스 서비스
