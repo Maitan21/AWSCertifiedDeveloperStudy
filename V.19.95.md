@@ -74,7 +74,51 @@
     - 인터넷 게이트웨어, NAT, VPN, AWS Direct connect의 연결을 필요로 하지 않고 privateLink 구동 지원 AWS 서비스 및 VPC엔드포인트 서비스에 비공개로 연결 가능
     - 이 엔드포인트를 이용하면 VPC와 기타 서비스간의 트래픽은 Amazon네트워크를 벗어나지 않는다.
 
+17. Cluster
+    - 한 가용영역에 인스턴스들을 배치함으로써, 낮은 지연성을 확보할 수 있다. 
+    - HPC등에 이용가능 (높은 네트워크 처리량)
 
+18. Placement Groups (배치 그룹)
+    - 기본적으로 새로운 EC2 인스턴스를 시작하면, 인스턴스는 기본 하드웨어 전반에 분산되도록하여 장애 시의 영향을 줄이려고 한다.
+    - 하지만 워크로드에 따라 이를 전략적으로 배치함으로써 최적의 효율을 낼 수 있다.
+    - 비용은 발생 하지 않는다.
+
+19. AWS Fargate
+    - EC2처럼 기본 인프라를 관리할 필요없이(서버리스) `컨테이너`를 배포하고 관리할 수 있는 기능
+
+20. AWS Transfer for SFTP
+    - 온프레미스 NFS서버와 연동하여 소량의 데이터를 정기적으로 S3에 백업
+    - 비용 효율적
+
+21. AWS DataSync
+    - 온프레미스 스토리지 또는 AWS 서비스간(스토리등) 데이터 이동 `간소화, 자동화 및 가속화`
+   - 암호화 제공
+   - 운용 비용 절감
+   - 데이터를 더 빠르게 이전
+
+22. Spot Instance (EC2)
+   - 저렴하고 예측 가능한 요금
+   - 대규모 운영 가능(병렬 등)
+   - 사용 편의성
+
+23. Origin Acess Identity(OAI)
+   - 특정 ID만 S3 버킷에 엑세스할 수 있도록 해줌
+   - 요청자 대신 버킷에 엑세스할 수 있음
+   - 사용자가 Amazon S3 URL을 사용하는 것과 같은 방법으로 객체에 액세스 할 수 없음.
+
+24. S3 Cross Resion Replication
+   - CloudFront와 비슷하지만 다르다.
+   - 각 지역에 모두 셋업이 되어야한다.
+   - File은 거의 real-time으로 업데이트 (CloudFront는 TTL(Time to live)를 이용해서 cache)
+   - read only 
+   - 몇개의 지역만에 아주 낮은 latency를 제공해야할때 사용
+### Elastic Container Service
+- 높은 확장성과 퍼포먼스
+- 별도의 관리를 위한 서버를 배포하지 않고 배포와 관리가 가능
+- 사용자가 컨테이너화된 앱을 쉽게 빌드하고 배포할 수 있도록 지원
+- Batch Processing
+- Microservices
+- Application Migration to the Cloud
 
 ## Route 53
 ### Routing Policy
@@ -109,6 +153,7 @@
    - on demand
    - IAM을 사용하여 서비스의 리소스에 대한 엑세스를 제한 가능
    - 개발자가 별도로 클러스터를 관리할 필요없이 DAX가 알아서 테이블에 메모리 Accelerator를 추가하는 모든 필요한 작업을 진행
+   - 
 ## SQS, SWF, SNS
 ### SQS (Simple Queu Service)
 - 분산 시스템 및 서버시르 애플리케이션을 위한 `완전 관리형 메시지 대기열`
@@ -117,6 +162,7 @@
 - AWS KMS와 통합하여 암호화 제공, SQS메시지를 보호하는 키를 `중앙에서`관리
 - `pull`방식, `push`하지 않는다
 - FIFO
+- 시간이 오래걸릴때 `ChangeMessageVisibility`API를 이용하여 처리시간을 연장가능
   
 ### SWF (Simple Work Flow)
 - 백그라운드 작업을 `병렬 혹은 `순차`방식으로 실행
@@ -178,6 +224,23 @@
    - 활성화 시 S3 가 동일한 객체에 대해 여러 쓰기 요청을 동시에 수신하면 모든 객체를 저장
    - S3에 버킷에 모든 객체의 모든 버전을 보전, 검색 및 복원
 
+8. S3 Transfer Accleraration
+   - CloudFront의 Edge location 이용한 업로드 기법
+   - end user와 S3 bucket 사이의 `먼 거리를` 빠르고, 쉽고, 안전하게 전송할 수 있도록 해준다.
+   - 전세계로부터 `중앙 버킷`으로 저장
+   - 기가바이트 또는 테라바이트 데이타 처리가능가능
+   - 만약 1기가 밑 수준의 저 데이터라면 cloudFront가 더 효과적
+
+9. S3 Glacier Deep Archive
+   - 장기 데이터 보존 및 디지털 보존을 위한 안전하고 안정적인 객체 스토리지
+   - 가장 저렴한 스토리지
+   - 엑세스할 필요가 거의 없는 데이터의 내구력 있는 보관 사본을 생성
+   - 온프레미스 `테이프 라이브러리`의 필요성을 없앰.
+   - 12시간 이내에 검색 가능
+
+
+
+
 
 ## Storage
 ### Storage optimized instances withe instance store
@@ -193,6 +256,7 @@
 - Microsoft Windows 기반 스토리지 (Lustre와 Window File Server)
 - 고성능 컴퓨팅(HPC), 기계 학습 및 전자 설계 자동호와 같은 워크로드에 대한 호환성 및 기능을 제공
 - 쉽고 비용 효율적이다.
+- migrate a Windows internet informatin Services web application
 
 ### EBS
 - EC2 인스턴스에서 파일시스템용으로 사용되는 블록 스토리지
@@ -205,7 +269,25 @@
 
 ### Snowball
 - 테라바이트 또는 페타바이트 규모의 데이터를 AWS와 주고 받는 서비스
-- 인터넷 연결이 곤란한 장소에서 `비용 효율적`으로 AWS 클라우드의 스토리지 및 컴퓨팅 파워에 엑세스가능
+- 인터넷 연결이 곤란한 장소(대역폭 제한등) 에서 `비용 효율적`으로 AWS 클라우드의 스토리지 및 컴퓨팅 파워에 엑세스가능
+
+### Amazon Aurora
+- 동적 오토 scaling 가능
+- 각각의 AZ에 2개의 카피를 가지고 있고 최소한 세개의 AZ를 가지고 있기 떄문에 6개의 카피의 데이터가 만들어진다고 볼 수 있다. (Highly Availability)
+- Performing table joins
+
+### Amazon Aurora Global Databse
+- 전 세계적으로 분산된 애플리케이션을 위해 설계
+- 단일 Aurora 데이터베이스를 `여러 AWS 리전`으로 확장
+- 데이터베이스 성능에 영향을 주지않으면서 데이터 복제 가능
+- 각 리전에서 낮은 지연 시간으로 빠른 로컬 읽리를 지원
+- 리전 규모의 가동 중단 발 생 시 재해 복구 제공
+
+### AWS Athena
+- SQL를 사용하여 직접 데이터를 쉽게 분석할 수 있는 대화형 쿼리 서비스
+- 서버리스 서비스이므로 설정하거나 관히할 인프라가 필요없으며, 쿼리에 대해서만 비용 지불
+- 많은 데이터 세트 와 복잡한 쿼리가 있더라도 결과가 바르다.
+- S3의 교차복제와 함께 글로벌 리전에서 서비스 제공 가능
 
 ## 보안 자격
 ### AWS WAF
@@ -232,7 +314,15 @@
 ### Amazon Kinesis
 - `실시간 스트리밍 데이터`를 손쉽게 수집, 처리 분석할 수 잇으므로 적시에 통찰력을 확보하고 새로운 정보에 신속하게 대응
 - `모든 규모의 스트리밍 데이터`를 비용 효율적으로 처리할 수 있는 핵심 기능과 더불어 애플리케이션 요구 사항에 가장 적합한 도구를 선택할 수 있는 유연성 제공
-- Amazon kinesiss Data Firehose 를 이용하여 Amazon S3 에 데이터 저장 가능
+- Amazon kinesis Data Firehose 를 이용하여 Amazon S3 에 데이터 저장 가능
+- `Amazon Kinesis Data Streams`는 고도로 확장 가능하고 내구력 있는 실시간 데이터 스트리밍 서비스
+    -  사용자 편의정 / 탄력성 / 저렴한 비용 / 실시간 성능 / 내구성 / 보안
+
+
+### Cost Explorer
+- 시간에 따른 AWS 비용과 사용량을 시각화
+- 이해 및 관리할 수 있는 손쉬운 인터페이스 제공
+- 비용 및 사용량 데이터를 분석하는 사용자 지정 보고서를 작성하여 신속하게 시작
 
 ## 데이터베이스
 ### DynamoDB
