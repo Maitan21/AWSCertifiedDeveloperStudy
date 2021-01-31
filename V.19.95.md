@@ -37,10 +37,11 @@
 
 9. Storage Gateway 
     -  온프레미스 소프트웨어 어플라이언스 클라이드  기반 스토리지와 연결
+    -  즉각적인 검색에 추가적인 비용 없음
     -  file gateway : 수명주기 정책, 지역 간 복제 및 버전 관리를 사용하여 S3데이터를 관리 가능 / 데이터에 직접 액세스 가능
     -  volume gateway : 캐싱 / 저장 볼륨
        -  캐싱볼륨 : 자주 액세스하는 데이터에 액세스 
-       -  저장볼륨 : 지연 시간이 낮은 액세스가 필요한 경우 먼저 모든 데이터를 로컬로 저장하도록 온프레미스 게이트웨이를 구성 / 스냅샷저장,
+       -  저장볼륨 : 지연 시간이 낮은 액세스가 필요한 경우 먼저 모든 데이터를 로컬로 저장하도록 온프레미스 게이트웨이를 구성 / 스냅샷저장
 <img src="(https://user-images.githubusercontent.com/45276804/104834933-6549f480-58e6-11eb-9b6a-8c92726dd5da.png">
 10. AWS Batch
     - EC2 인스턴스를 사용하여 배치 형태의 task를 생성, 관리하는 관리 도구
@@ -82,6 +83,7 @@
     - 기본적으로 새로운 EC2 인스턴스를 시작하면, 인스턴스는 기본 하드웨어 전반에 분산되도록하여 장애 시의 영향을 줄이려고 한다.
     - 하지만 워크로드에 따라 이를 전략적으로 배치함으로써 최적의 효율을 낼 수 있다.
     - 비용은 발생 하지 않는다.
+    - cluster 배치등을 통한 low-latency 와 higt throughout 제공
 
 19. AWS Fargate
     - EC2처럼 기본 인프라를 관리할 필요없이(서버리스) `컨테이너`를 배포하고 관리할 수 있는 기능
@@ -112,6 +114,26 @@
    - File은 거의 real-time으로 업데이트 (CloudFront는 TTL(Time to live)를 이용해서 cache)
    - read only 
    - 몇개의 지역만에 아주 낮은 latency를 제공해야할때 사용
+
+25. Amazon Elastic Kubrenetes Service (AWS EKS)
+   - 작동 및 유지 관리할 필요 없이 쿠버네티스는 컨테이너화된 애플리케이션의 배포, 조정 및 관리 자동화를 위한 오픈소스 시스템
+   - 고가용성
+   - 온프레미스, 클라우드 상관없이 EKS에서 실행중인 애플리케이션은 표준 쿠버네티스로 쉽게 마이그레션 가능
+
+
+26. AWS Transit Gateway
+   - 중앙 허브를 통해 VPC와 온프레미스 네트워크를 연결
+   - 복잡한 피어링 관계를 제거 네트워크를 간소화
+
+27. Amazon ElasticSearch(ES)
+   - 실시간으로 데이터를 분석, 검색, 시각화 시켜주는 서비스
+   - 간단한 배포 및 관리
+   - 가용성과 비용 효율성이 뛰어나다
+   - Amazon VPC로 네트워크를 분리시키고 KMS를 이용해서 저장 데이터를 암호화 가능
+   - `Kibana`를 이용하여 데이터 시각화 가능
+
+
+  
 ### Elastic Container Service
 - 높은 확장성과 퍼포먼스
 - 별도의 관리를 위한 서버를 배포하지 않고 배포와 관리가 가능
@@ -133,7 +155,7 @@
    - `위치(지역)`에 따라 가장 가까운  지역으로 라우팅 해주는 방법
 
 4. geoproximity policy
-   - Traffic flow -> Traffic policy 를 통해서 아주 복잡한 형태으 지역기반 라우팅 가능
+   - Traffic flow -> Traffic policy 를 통해서 아주 복잡한 형태의 지역기반 라우팅 가능
 
 5. multivalue routing policy
    - 트랙픽 ID를 부여하여 이를 가지고 health check 가능 
@@ -145,6 +167,7 @@
    - 처리량이 많고 지연시간이 짧은 인 메모리 데이터 스토어에서 데이터를 검색하여 데이터 집약적 앱을 구축하거나 앱 성능 개선
    - 게임, 광고 기술, 금융 서비스, 의료 서비스 및 IoT 앱에서 많이 사용됨
    - 데이터 복제를 통한 높은 가용성과 성능속도
+   - 쉽게 Cluster 라고 할 수 있다. 클라우드 내 `분산 메모리데이터 저자소` 
    - 데이터가 비교적 동일하게 유지 또는 빠르게 변경 가능
 
 2. Amazon DynamoDB Accelerator (DAX)
@@ -153,10 +176,10 @@
    - on demand
    - IAM을 사용하여 서비스의 리소스에 대한 엑세스를 제한 가능
    - 개발자가 별도로 클러스터를 관리할 필요없이 DAX가 알아서 테이블에 메모리 Accelerator를 추가하는 모든 필요한 작업을 진행
-   - 
+
 ## SQS, SWF, SNS
 ### SQS (Simple Queu Service)
-- 분산 시스템 및 서버시르 애플리케이션을 위한 `완전 관리형 메시지 대기열`
+- 분산 시스템 및 서버 애플리케이션을 위한 `완전 관리형 메시지 대기열`
 - 마이크로 서비스 사용 가능
 - 서버 측 암호화(SSE)를 통해 각 메시지 본무을 암호화 하여 애플리케이션에 완전히 전달
 - AWS KMS와 통합하여 암호화 제공, SQS메시지를 보호하는 키를 `중앙에서`관리
@@ -179,7 +202,7 @@
 - 관리 콘솔에서 web방식으로 설정
 - e.g.2) 이미지 업로드 이후 작업을 SNS로 제어하기
     - S3 이미지 업로드 -> 이벤트 발생 -> AWS SNS호출 -> 이미지 업로드 Topic 발행 -> Subscriber 병령 구독 
-    - AWS SES -> 이미지 업로더에게 확인 메일 발송
+    - AWS SNS -> 이미지 업로더에게 확인 메일 발송
     - AWS SQS -> 이미지 리사이징 작업을 큐에 추가
     - AWS Lambda ->Amazon Rekognition을 구동하여 이미지 인식
   
@@ -250,7 +273,11 @@
 - EC2 인스턴트용 파일 스토리지
 - EC2 인스턴스에서 공유 가능한 파일 스토리지
 - 멀티 AZ 에 대응
+- 매시간 분석
 - 빅데이터 분석, 웹 서빙, 내용 관리, 어플리케이션 테스트, 워크플로,데이터베이스 백업 등
+- Throughput mode
+    - Bursting : 일정 시간 처리량 부스트
+    - Provisioned : 요금은 Bursting보다 높으나 지속적인 처리량 보장
 
 ### FSx
 - Microsoft Windows 기반 스토리지 (Lustre와 Window File Server)
@@ -271,10 +298,19 @@
 - 테라바이트 또는 페타바이트 규모의 데이터를 AWS와 주고 받는 서비스
 - 인터넷 연결이 곤란한 장소(대역폭 제한등) 에서 `비용 효율적`으로 AWS 클라우드의 스토리지 및 컴퓨팅 파워에 엑세스가능
 
+### Snowball Edge
+- 데이터를 수집 및 처리하여 데이터를 AWS로 전송 (선 작업 후 전송)
+- `Edge Compute` : 엣지 로케이션에서 센서 또는 시스템이 지속적으로 생성하는 데이터를 온라인으로 AWS에 전송
+- `Edge Storage` : 엣지 로케이션에서 집계 및 처리한 후에 AWS 전송 (영상등을 수집 및 인코딩 후에 S3로 마이그레이션) 
+
 ### Amazon Aurora
 - 동적 오토 scaling 가능
 - 각각의 AZ에 2개의 카피를 가지고 있고 최소한 세개의 AZ를 가지고 있기 떄문에 6개의 카피의 데이터가 만들어진다고 볼 수 있다. (Highly Availability)
 - Performing table joins
+- Amazon Aurora Serverless
+    - Aurora의 온디맨드 Auto Scaling 구성
+    - 요구 사항을 기반으로 자동으로 시작 및 종료 그리고 용량을 확장 또는 축소
+    - 데이터베이스 `용량을 관리하지 않고도` 클라우드에서 데이터베이스를 실행 할 수 있다.
 
 ### Amazon Aurora Global Databse
 - 전 세계적으로 분산된 애플리케이션을 위해 설계
@@ -338,3 +374,16 @@
 - 기존 비즈니스 인텔리전스 도구를 사용하여 모든 데이터를 간단하고 비용 효율적으로 분석할 수 있도록 지원하는 페타바이트 규모의 빠른 완전관리형 데이터 웨어하우스 서비스
 - 몇백 GB부터 페타바이트 규모 이상의 데이터 세트에 최적화
 - 태그설정 가능
+
+## Route 53
+### Policy 
+- `Simple routing policy` : 도메인에 대해 지정된 기능을 수행하는 단일 리소스
+- `Failover routing policy` : active-passive failover를 구성할때 사용
+- `Geolocation routing policy` : 사용자 위치에 따라 트래픽을 라우팅
+- Geoproximity routing policy : 리소스의 위치를 기준으로 트래픽을 라우팅하고 트래픽을 한 위치의 리소스에서 다른 위치의 리소스로 이동시킬때 사용
+- `Latency routing policy` : 여러 AWS 리전에 리소스가 있고 최상의 지연시간을 제공하는 지역으로 트래픽을 라우팅
+- `Multivalue answer routing policy` : 최대 8개의 정상 레코드가 무작위로 선택된 상태에서 라우트53이 DNS쿼리에 응답하기를 원할 때
+- `Weighted routing policy`    : 지정한 비율로 트래픽을 여러 리소스로 라우팅
+
+
+  
