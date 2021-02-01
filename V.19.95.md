@@ -132,7 +132,15 @@
    - Amazon VPC로 네트워크를 분리시키고 KMS를 이용해서 저장 데이터를 암호화 가능
    - `Kibana`를 이용하여 데이터 시각화 가능
 
+28. Cross Region EC2 AMI Copy
+   - Amazon Machine Image를 통해 EBS Snapshaot 보다도 더 쉽고 저비용으로 카피 가능
+   - Simple and Consistent Multi-Region Deployment
+   - 퍼포먼스
+   - 확장성
 
+29. Lambda + API Gateway -> REST API
+   - API Gateway : AWS또는 기타 웹서비스와 AWS 클라우드에 저장된 데이터에 엑세스하는 Api 생성 또는 제공
+   - Lambda : serverless 로 AWS resource와 함꼐 시동되어 이벤트 발생
   
 ### Elastic Container Service
 - 높은 확장성과 퍼포먼스
@@ -281,7 +289,7 @@
 
 ### FSx
 - Microsoft Windows 기반 스토리지 (Lustre와 Window File Server)
-- 고성능 컴퓨팅(HPC), 기계 학습 및 전자 설계 자동호와 같은 워크로드에 대한 호환성 및 기능을 제공
+- 고성능 컴퓨팅(HPC), 기계 학습 및 전자 설계 자동화와 같은 워크로드에 대한 호환성 및 기능을 제공
 - 쉽고 비용 효율적이다.
 - migrate a Windows internet informatin Services web application
 
@@ -296,6 +304,7 @@
 
 ### Snowball
 - 테라바이트 또는 페타바이트 규모의 데이터를 AWS와 주고 받는 서비스
+- 10TB - 10PB사이에서 훌륭야 cost-effective
 - 인터넷 연결이 곤란한 장소(대역폭 제한등) 에서 `비용 효율적`으로 AWS 클라우드의 스토리지 및 컴퓨팅 파워에 엑세스가능
 
 ### Snowball Edge
@@ -353,6 +362,7 @@
 - Amazon kinesis Data Firehose 를 이용하여 Amazon S3 에 데이터 저장 가능
 - `Amazon Kinesis Data Streams`는 고도로 확장 가능하고 내구력 있는 실시간 데이터 스트리밍 서비스
     -  사용자 편의정 / 탄력성 / 저렴한 비용 / 실시간 성능 / 내구성 / 보안
+- UpdateShardCount 를 사용하여 스트림에 shards 수를 늘려 처리량을 높일 수 있다.
 
 
 ### Cost Explorer
@@ -373,6 +383,8 @@
 ## Redshift
 - 기존 비즈니스 인텔리전스 도구를 사용하여 모든 데이터를 간단하고 비용 효율적으로 분석할 수 있도록 지원하는 페타바이트 규모의 빠른 완전관리형 데이터 웨어하우스 서비스
 - 몇백 GB부터 페타바이트 규모 이상의 데이터 세트에 최적화
+- 교차 리전 스냅샷을 구성하여 다른 리전에서의 탄력적인 데이터웨어 하우스 구축 가능
+- EBS 이용 불가
 - 태그설정 가능
 
 ## Route 53
