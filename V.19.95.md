@@ -78,6 +78,7 @@
 17. Cluster
     - 한 가용영역에 인스턴스들을 배치함으로써, 낮은 지연성을 확보할 수 있다. 
     - HPC등에 이용가능 (높은 네트워크 처리량)
+    - Multi AZ 지원안함
 
 18. Placement Groups (배치 그룹)
     - 기본적으로 새로운 EC2 인스턴스를 시작하면, 인스턴스는 기본 하드웨어 전반에 분산되도록하여 장애 시의 영향을 줄이려고 한다.
@@ -142,7 +143,23 @@
    - API Gateway : AWS또는 기타 웹서비스와 AWS 클라우드에 저장된 데이터에 엑세스하는 Api 생성 또는 제공
    - Lambda : serverless 로 AWS resource와 함꼐 시동되어 이벤트 발생
   
-### Elastic Container Service
+30. ACID
+   - Atomicity, Consistency, Isolation, Durability
+   - RDS Multi-AZ 
+
+31. AWS Global Accelerator
+   - 허용 목록 생성 가능
+   - 고 가용성의 일회성 솔루션
+   - 모든 리전에 대한 엔드 포인트를 생성하고 이를 다리 지역의 모든 ALB를 해당 엔드포인트에 등록
+
+32. AWS Site-toSite VPN
+   - 네트워크와  Amazon Virtual Private Cloud 또는 AWS Transit Gateway간에 암호화 된 터널을 생성
+   - 소량의 트래픽 처리
+   - 빠른 연결
+   - 
+
+
+### Elastic Container Service (ECS)
 - 높은 확장성과 퍼포먼스
 - 별도의 관리를 위한 서버를 배포하지 않고 배포와 관리가 가능
 - 사용자가 컨테이너화된 앱을 쉽게 빌드하고 배포할 수 있도록 지원
@@ -283,6 +300,7 @@
 - 멀티 AZ 에 대응
 - 매시간 분석
 - 빅데이터 분석, 웹 서빙, 내용 관리, 어플리케이션 테스트, 워크플로,데이터베이스 백업 등
+- lifecycle policy 7~90일
 - Throughput mode
     - Bursting : 일정 시간 처리량 부스트
     - Provisioned : 요금은 Bursting보다 높으나 지속적인 처리량 보장
@@ -341,6 +359,7 @@
 
 ### KMS
 - `데이터 암호화`에 사용되는 암호화 키 생성, 제어 및 애플리케이션 암호화를 위한 SDK 제공
+- 마스터키를 사용해 클라이언트 측 암호화 가능
 
 ### Parameter Store
 - 구성 데이터 관리 및 암호 관리를 위한 계층적 스토리지 제공
