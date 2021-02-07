@@ -156,7 +156,16 @@
    - 네트워크와  Amazon Virtual Private Cloud 또는 AWS Transit Gateway간에 암호화 된 터널을 생성
    - 소량의 트래픽 처리
    - 빠른 연결
-   - 
+
+33. AWS Single Sign-On
+   - 엑세스 관리
+   - AWS 계정 및 애플리케이션에 대한 엑세스를 `중앙`에서 관리 
+   - 기존 자격 증명 소스에 쉽게 연결 가능
+
+34. AWS CloudHSM
+   - 클라우드에서 자체 암호화 키를 손쉽게 생성 및 사용할 수 있도록 지원하는 클라우드 기반 하드웨어 보안 모듈
+   - 선결제 비용 없이 온디맨드로 신속하게 확장 및 축소
+   
 
 
 ### Elastic Container Service (ECS)
