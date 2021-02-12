@@ -87,7 +87,8 @@
     - cluster 배치등을 통한 low-latency 와 higt throughout 제공
 
 19. AWS Fargate
-    - EC2처럼 기본 인프라를 관리할 필요없이(서버리스) `컨테이너`를 배포하고 관리할 수 있는 기능
+    - EC2처럼 기본 인프라를 관리할 필요없이(`서버리스`) `컨테이너`를 배포하고 관리할 수 있는 기능
+
 
 20. AWS Transfer for SFTP
     - 온프레미스 NFS서버와 연동하여 소량의 데이터를 정기적으로 S3에 백업
@@ -150,6 +151,7 @@
 31. AWS Global Accelerator
    - 허용 목록 생성 가능
    - 고 가용성의 일회성 솔루션
+   - `방화벽`에서 사용가능한 정적 IP 제공
    - 모든 리전에 대한 엔드 포인트를 생성하고 이를 다리 지역의 모든 ALB를 해당 엔드포인트에 등록
 
 32. AWS Site-toSite VPN
@@ -267,6 +269,7 @@
     - 자주 접근되지 않지만, 가끔 필요할 때는 빠른 속도로 검색하는 경우를 위한 S3
     - S3 Standard 보다 가격이 저렴하지만, retrieval fee(검색 비용)이 따로 요구됨
 3. S3 One-Zone-Infrequent Access
+   - 가격이 가장 쌈
    - 단일 가용 영역에 객체를 저장하도록 선택
    - 단일 가용 영역 내에 데이터를 중복으로 저장, 지리적으로 분리된 여러 가용 영역 전체에 데이터를 중복 저장
    - 가용영역이 파괴시 데이터 손실
@@ -299,6 +302,7 @@
    - 만약 1기가 밑 수준의 저 데이터라면 cloudFront가 더 효과적
 
 9. S3 Glacier Deep Archive
+   - accessible for infrequent
    - 장기 데이터 보존 및 디지털 보존을 위한 안전하고 안정적인 객체 스토리지
    - 가장 저렴한 스토리지
    - 엑세스할 필요가 거의 없는 데이터의 내구력 있는 보관 사본을 생성
@@ -331,8 +335,9 @@
 
 ### EBS
 - EC2 인스턴스에서 파일시스템용으로 사용되는 블록 스토리지
+- 하나의 VPC에서  EC2 인스턴스와높은 성능의 데이터 공유 제공
 - 데이터에 빠르게 엑세스하고 장기적으로 지속해야 하는 경우 사용
-- EBS Provisioned IOPS SSD(io1) : I/O 특성 좋은 것으로 NoSQL and relational databaeses 등 사용
+- EBS Provisioned IOPS SSD(io1) : I/O 특성 좋은 것으로 NoSQL and relational databaeses 등 사용 -> 고성능 처리량많은 때 사용
 - EBS General Purpose SSD(gp2) : 부팅 빠르고 latency에 좋음
 - Throughput Opimized HDD(st1) : 빅데이터와 같은 곳으로 내부 처리량이 많은 것에 사용
 - Cold HDD(sc1) : 모니터링과 같은 하루 단위로 필요한 경우로 사용량인 적은 경우
@@ -340,13 +345,18 @@
 
 ### Snowball
 - 테라바이트 또는 페타바이트 규모의 데이터를 AWS와 주고 받는 서비스
-- 10TB - 10PB사이에서 훌륭야 cost-effective
+- 10TB - 10PB사이에서 훌륭한 cost-effective
 - 인터넷 연결이 곤란한 장소(대역폭 제한등) 에서 `비용 효율적`으로 AWS 클라우드의 스토리지 및 컴퓨팅 파워에 엑세스가능
+- 기존 저장소에서 네트워크 `대역폭이 충분하지 않을 때`, 대용량 데이터 세트를 클라우드로 이전하는데 도움
 
 ### Snowball Edge
 - 데이터를 수집 및 처리하여 데이터를 AWS로 전송 (선 작업 후 전송)
 - `Edge Compute` : 엣지 로케이션에서 센서 또는 시스템이 지속적으로 생성하는 데이터를 온라인으로 AWS에 전송
 - `Edge Storage` : 엣지 로케이션에서 집계 및 처리한 후에 AWS 전송 (영상등을 수집 및 인코딩 후에 S3로 마이그레이션) 
+- 기존 저장소에서 네트워크 `대역폭이 충분하지 않을 때`, 대용량 데이터 세트를 클라우드로 이전하는데 도움
+
+<img src="https://d2908q01vomqb2.cloudfront.net/7b52009b64fd0a2a49e6d8a939753077792b0554/2019/07/24/product-page-diagram_AWS-Snowball.1feefdf098fded475532f6d689b49b7c7fd0deb9.png">
+
 
 ### Amazon Aurora
 - 동적 오토 scaling 가능
