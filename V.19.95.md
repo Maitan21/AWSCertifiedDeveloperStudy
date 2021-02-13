@@ -42,7 +42,9 @@
     -  volume gateway : 캐싱 / 저장 볼륨
        -  캐싱볼륨 : 자주 액세스하는 데이터에 액세스 
        -  저장볼륨 : 지연 시간이 낮은 액세스가 필요한 경우 먼저 모든 데이터를 로컬로 저장하도록 온프레미스 게이트웨이를 구성 / 스냅샷저장
-<img src="(https://user-images.githubusercontent.com/45276804/104834933-6549f480-58e6-11eb-9b6a-8c92726dd5da.png">
+
+<img width="100%" src="https://user-images.githubusercontent.com/45276804/104834933-6549f480-58e6-11eb-9b6a-8c92726dd5da.png">
+
 10. AWS Batch
     - EC2 인스턴스를 사용하여 배치 형태의 task를 생성, 관리하는 관리 도구
     - Spot 혹은 `On-Demand 형태`의  vCPU가 포함된 Compute 환경 생성
@@ -68,7 +70,7 @@
     - Cold Data에 반대로 즉각적인 엑세스와 최고급의 스토리지가 필요
 
 15. NAT Gateway
-    - public subnet에두어 엔드포인트를private subnet에 두면 private subnet 인스턴스들을 외부 접속이 가능해짐
+    - public subnet에두어 엔드포인트를 private subnet에 두면 private subnet 인스턴스들을 외부 접속이 가능해짐
     - 그러나 반대로, 외부에서는 접근 불가
 
 16. VPC End Point
@@ -179,6 +181,9 @@
    - 개별 IAM 사용자에 대해 활성화 가능
    - MFA를 이용해 리소스를 보호 
    - 예) SNS / OTP
+
+41. TaskRoleArn
+   - 사용자 대신 AWS API를 호출하는 작업 권한을 컨테이너에 부여
    
 ### Elastic Container Service (ECS)
 - 높은 확장성과 퍼포먼스
@@ -187,6 +192,7 @@
 - Batch Processing
 - Microservices
 - Application Migration to the Cloud
+
 
 ## Route 53
 ### Routing Policy
@@ -259,6 +265,10 @@
 ### SQS vs. SWF
 - SQS : Message oriented API, 14일간 메시지 유지, 메시지는 중복될 수도 있다. 추가 모니터링 필요
 - SWF : Task oriented API, 1년간 워크 유지, task는 `한번 할당`, 모니터링 가능
+
+### Amazon MQ
+- Amazon MQ는 널리 사용되는 다양한 메시지 브로커와 호환되는 관리형 메시지 브로커 서비스
+- active / standby
 
 ## AWS S3
 ### Storage Classes
@@ -380,6 +390,18 @@
 - 많은 데이터 세트 와 복잡한 쿼리가 있더라도 결과가 바르다.
 - S3의 교차복제와 함께 글로벌 리전에서 서비스 제공 가능
 
+### AWS Storage Gateway vs AWS DataSync
+- AWS DataSync (`이동`)
+   - 데이터 전송에 이상적
+   - AWS로 마이그레이션하고, 분석 및 처리를 위해 데이터를 클라우드로 전송, 데이터를 보관하여 온 프레미스 스토리지 용량을 확보
+   - `비지니스 연속성`을 위해 데이터를 AWS에 복제 
+- AWS Storage Gateway (`확장`)
+   - 무제한 클라우드 스토리에 대한 온 프레미스 엑세스를 제공
+   - `하이브리드 클라우드 스토리지`
+
+### Tip
+- 같은 리전내 EC2와 S3간의 데이터전송은 비용이 들지 않는다.
+- Rest API / Data Store : Amazon API Gateway -> AWS Lambda -> Amazon DynamoDB 
 
 
 ## 보안 자격
@@ -387,9 +409,11 @@
 - CloudFront 배포 또는 ALB로 전달되는 웹 요청을 `모니터링`하는 웹 어플리케이션 방화벽
 - 사용자가 지정하는 조건(요청을 송신한 IP주소 또는 요청의 값)에 따라 요청을 `차단`
 
-### KMS
+### Key Management Service (KMS)
 - `데이터 암호화`에 사용되는 암호화 키 생성, 제어 및 애플리케이션 암호화를 위한 SDK 제공
 - 마스터키를 사용해 클라이언트 측 암호화 가능
+- 확장 가능한 키
+
 
 ### Parameter Store
 - 구성 데이터 관리 및 암호 관리를 위한 계층적 스토리지 제공
@@ -398,6 +422,9 @@
 - 중앙 집중식 방법을 원하는 고객
 - 서로 다른 로그인 및 참조 스트림을 `쉽게 저장`하려는 소프트웨어 개발자
 - 보안 암호 및 암호에 변경 사항이 있거나 없는 경우 알림을 받으려는 관리자
+
+### AWS Shield
+- AWS에서 실행되는 웹 애플리케이션을 `DDoS` 공격으로부터 보호하는 관리형 서비스
 
 ## 분석
 ### AWS Glue
