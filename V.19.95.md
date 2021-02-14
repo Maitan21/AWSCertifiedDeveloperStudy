@@ -201,7 +201,7 @@
    - 지역에 따라서 응답속도가 다를 수 있지만 이 반응속도에 따라 routing응 사용자에게 응답속도를 기준으로 가장 가까운 곳에 있는 서비스를 받을 수 있도록 해준다.
 
 2. fileover routing policy
-   - 주 네트워크와 부 네트워크를 분리하여 주 네트워크에 문제 발생시 부네트워크로 연결
+   - 주 네트워크와 부 네트워크를 분리하여 주 네트워크에 문제 발생시 부네트워크로 연결　
 
 3. geolocation routing policy
    - `위치(지역)`에 따라 가장 가까운  지역으로 라우팅 해주는 방법
@@ -325,7 +325,7 @@
 - 로컬 스토리지의 매운 큰 데이터 세트에 대한 높은 순차 읽기 및 쓰기 엑세스가 필요한 워크로드를 위해 설게됨
 - 지연시간이 짧은 수만 개의 IOPS를 애플리케이션에 제공하도록 최적화
 ### Amazon EFS (Elastic File System)
-- EC2 인스턴트용 파일 스토리지
+- `EC2` 인스턴트용 파일 스토리지
 - EC2 인스턴스에서 공유 가능한 파일 스토리지
 - 멀티 AZ 에 대응
 - 매시간 분석
@@ -344,9 +344,9 @@
 
 
 ### EBS
-- EC2 인스턴스에서 파일시스템용으로 사용되는 블록 스토리지
+- `EC2 인스턴스`에서 파일시스템용으로 사용되는 블록 스토리지
 - 하나의 VPC에서  EC2 인스턴스와높은 성능의 데이터 공유 제공
-- 데이터에 빠르게 엑세스하고 장기적으로 지속해야 하는 경우 사용
+- 데이터에 `빠르게 엑세스`하고 `장기적으로 지속`해야 하는 경우 사용
 - EBS Provisioned IOPS SSD(io1) : I/O 특성 좋은 것으로 NoSQL and relational databaeses 등 사용 -> 고성능 처리량많은 때 사용
 - EBS General Purpose SSD(gp2) : 부팅 빠르고 latency에 좋음
 - Throughput Opimized HDD(st1) : 빅데이터와 같은 곳으로 내부 처리량이 많은 것에 사용
@@ -380,9 +380,9 @@
 ### Amazon Aurora Global Databse
 - 전 세계적으로 분산된 애플리케이션을 위해 설계
 - 단일 Aurora 데이터베이스를 `여러 AWS 리전`으로 확장
-- 데이터베이스 성능에 영향을 주지않으면서 데이터 복제 가능
-- 각 리전에서 낮은 지연 시간으로 빠른 로컬 읽리를 지원
-- 리전 규모의 가동 중단 발 생 시 재해 복구 제공
+- 데이터베이스 `성능에 영향을 주지않으면서 데이터 복제 가능`
+- 각 리전에서 낮은 지연 시간으로 빠른 로컬 읽기를 지원
+- 리전 규모의 가동 중단 발생 시 재해 복구 제공
 
 ### AWS Athena
 - SQL를 사용하여 직접 데이터를 쉽게 분석할 수 있는 대화형 쿼리 서비스
@@ -399,6 +399,8 @@
    - 무제한 클라우드 스토리에 대한 온 프레미스 엑세스를 제공
    - `하이브리드 클라우드 스토리지`
 
+### cloudfront
+- 특정 국가 접속 불가 가능
 ### Tip
 - 같은 리전내 EC2와 S3간의 데이터전송은 비용이 들지 않는다.
 - Rest API / Data Store : Amazon API Gateway -> AWS Lambda -> Amazon DynamoDB 
@@ -468,7 +470,7 @@
 - `Simple routing policy` : 도메인에 대해 지정된 기능을 수행하는 단일 리소스
 - `Failover routing policy` : active-passive failover를 구성할때 사용
 - `Geolocation routing policy` : 사용자 위치에 따라 트래픽을 라우팅
-- Geoproximity routing policy : 리소스의 위치를 기준으로 트래픽을 라우팅하고 트래픽을 한 위치의 리소스에서 다른 위치의 리소스로 이동시킬때 사용
+- `Geoproximity routing policy` : 리소스의 위치를 기준으로 트래픽을 라우팅하고 트래픽을 한 위치의 리소스에서 다른 위치의 리소스로 이동시킬때 사용
 - `Latency routing policy` : 여러 AWS 리전에 리소스가 있고 최상의 지연시간을 제공하는 지역으로 트래픽을 라우팅
 - `Multivalue answer routing policy` : 최대 8개의 정상 레코드가 무작위로 선택된 상태에서 라우트53이 DNS쿼리에 응답하기를 원할 때
 - `Weighted routing policy`    : 지정한 비율로 트래픽을 여러 리소스로 라우팅
