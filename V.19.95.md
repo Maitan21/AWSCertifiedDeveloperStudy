@@ -90,6 +90,7 @@
 
 19. AWS Fargate
     - EC2처럼 기본 인프라를 관리할 필요없이(`서버리스`) `컨테이너`를 배포하고 관리할 수 있는 기능
+    - on-demand 최대 500
 
 
 20. AWS Transfer for SFTP
@@ -179,11 +180,19 @@
 40. MFA
    - 사용자 이름과 암호 외에 보안을 한층 더 강화할 수 있는 간단하며 효과적인 수단
    - 개별 IAM 사용자에 대해 활성화 가능
-   - MFA를 이용해 리소스를 보호 
+   - MFA를 이용해 `리소스를 보호`(삭제 방지)
    - 예) SNS / OTP
 
 41. TaskRoleArn
    - 사용자 대신 AWS API를 호출하는 작업 권한을 컨테이너에 부여
+
+42. AWS Managed Microsoft AD
+   - Microsoft Active Directory를 클라우드에서 작동및 관리하는 서비스
+   - Windows Server 2012 R2에 의해 작동
+   - 이를 사용하여 디렉터리를 생성하면 자동으로 두 개의 도메인 컨트롤러를 생성하고 사용자를 대신하여 `DNS` 서비스를 추가
+   - 도메인 컨트롤러는 VPC내의 서로 다른 서브넷에 생성
+   - 이러한 중복으로 인해 장애가 발생하더라도 디렉터리에 엑세스 가능
+
    
 ### Elastic Container Service (ECS)
 - 높은 확장성과 퍼포먼스
