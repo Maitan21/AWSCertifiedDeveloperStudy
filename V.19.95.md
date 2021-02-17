@@ -282,8 +282,13 @@
 - Amazon MQ는 널리 사용되는 다양한 메시지 브로커와 호환되는 관리형 메시지 브로커 서비스
 - active / standby
 
-## AWS S3
-### Storage Classes
+
+## Storage
+### Storage optimized instances withe instance store
+- 로컬 스토리지의 매운 큰 데이터 세트에 대한 높은 순차 읽기 및 쓰기 엑세스가 필요한 워크로드를 위해 설게됨
+- 지연시간이 짧은 수만 개의 IOPS를 애플리케이션에 제공하도록 최적화
+
+### AWS S3
 1. S3 Standard
     - low latency를 제공하는 서비스에 적절x
     - 일반적인 disaster revoer 또는 백업
@@ -307,11 +312,11 @@
     - 짧은 지연 시간 높은 처리량 제공
     - 예측할 수 없는 워크로드일떄 가장 비용이 낮은 방법
 6. S3 Glacier
-  - 장기적인 백업 전용
-  - 높은 durability(내구성)
-  - Expedited retrievlas (1 to 5 minutes retrieval)
-  - Standard (3 to 5 hours)
-  - Bulk (5 to 12 hours)
+    - 장기적인 백업 전용
+    - 높은 durability(내구성)
+    - Expedited retrievlas (1 to 5 minutes retrieval)
+    - Standard (3 to 5 hours)
+    - Bulk (5 to 12 hours)
 7. S3 versioning (버전 관리)
    - 의도치 않은 사용자 작업(`삭제`)과 응용 프로그램 오류 모두에서 `쉽게 복구` 가능
    - 활성화 시 S3 가 동일한 객체에 대해 여러 쓰기 요청을 동시에 수신하면 모든 객체를 저장
@@ -332,11 +337,6 @@
    - 온프레미스 `테이프 라이브러리`의 필요성을 없앰.
    - 12시간 이내에 검색 가능
 
-
-## Storage
-### Storage optimized instances withe instance store
-- 로컬 스토리지의 매운 큰 데이터 세트에 대한 높은 순차 읽기 및 쓰기 엑세스가 필요한 워크로드를 위해 설게됨
-- 지연시간이 짧은 수만 개의 IOPS를 애플리케이션에 제공하도록 최적화
 ### Amazon EFS (Elastic File System)
 - `EC2` 인스턴트용 파일 스토리지
 - EC2 인스턴스에서 공유 가능한 파일 스토리지 (급격하고,`동시 읽기 쓰기`에 대응)
@@ -354,7 +354,6 @@
 - 쉽고 비용 효율적이다.
 - migrate a Windows internet informatin Services web application
 - For SMB use Amazon FSx for Windows.
-
 
 ### EBS
 - `EC2 인스턴스`에서 파일시스템용으로 사용되는 블록 스토리지
@@ -380,6 +379,13 @@
 
 <img src="https://d2908q01vomqb2.cloudfront.net/7b52009b64fd0a2a49e6d8a939753077792b0554/2019/07/24/product-page-diagram_AWS-Snowball.1feefdf098fded475532f6d689b49b7c7fd0deb9.png">
 
+### 요약 비교
+- S3는 순수한 스토리지 비용에서 EBS 및 EFS보다 저렴
+- EBS 및 EFS는 S3보다 성능이 뛰어납니다.
+- EBS는 EC2 인스턴스의 볼륨으로 사용됩니다.
+- S3에는 EFS와 달리 파일에 대한 계층 구조가 없습니다.
+- S3에는 기본 제공 쿼리 기능이 있습니다.
+- S3는 모든 리전에서 PUTS 와  DELETES 덮어 쓰기게 대한 최종 일관성을 제공
 
 ### Amazon Aurora
 - 동적 오토 scaling 가능
@@ -417,6 +423,8 @@
 ### Tip
 - 같은 리전내 EC2와 S3간의 데이터전송은 비용이 들지 않는다.
 - Rest API / Data Store : Amazon API Gateway -> AWS Lambda -> Amazon DynamoDB 
+- 고 가용성 -> 동일 VPC내 새 AZ에 배포 및 RDS 마이그레이션을 통한 가용성 증가
+
 
 
 ## 보안 자격
@@ -492,5 +500,3 @@
 - `Multivalue answer routing policy` : 최대 8개의 정상 레코드가 무작위로 선택된 상태에서 라우트53이 DNS쿼리에 응답하기를 원할 때
 - `Weighted routing policy`    : 지정한 비율로 트래픽을 여러 리소스로 라우팅
 
-
-  
