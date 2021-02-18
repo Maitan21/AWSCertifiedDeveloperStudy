@@ -196,6 +196,10 @@
 43. Direct Connect
    -  온프레와 AWS간 일관성있는 연결 제공
 
+44. AWS Elastic Beanstalk 
+   - 로드 밸런서
+   - 신속하고 쉽게 배포 하고 관리 
+
    
 ### Elastic Container Service (ECS)
 - 높은 확장성과 퍼포먼스
@@ -379,14 +383,6 @@
 
 <img src="https://d2908q01vomqb2.cloudfront.net/7b52009b64fd0a2a49e6d8a939753077792b0554/2019/07/24/product-page-diagram_AWS-Snowball.1feefdf098fded475532f6d689b49b7c7fd0deb9.png">
 
-### 요약 비교
-- S3는 순수한 스토리지 비용에서 EBS 및 EFS보다 저렴
-- EBS 및 EFS는 S3보다 성능이 뛰어납니다.
-- EBS는 EC2 인스턴스의 볼륨으로 사용됩니다.
-- S3에는 EFS와 달리 파일에 대한 계층 구조가 없습니다.
-- S3에는 기본 제공 쿼리 기능이 있습니다.
-- S3는 모든 리전에서 PUTS 와  DELETES 덮어 쓰기게 대한 최종 일관성을 제공
-
 ### Amazon Aurora
 - 동적 오토 scaling 가능
 - 각각의 AZ에 2개의 카피를 가지고 있고 최소한 세개의 AZ를 가지고 있기 떄문에 6개의 카피의 데이터가 만들어진다고 볼 수 있다. (Highly Availability)
@@ -425,6 +421,15 @@
 - Rest API / Data Store : Amazon API Gateway -> AWS Lambda -> Amazon DynamoDB 
 - 고 가용성 -> 동일 VPC내 새 AZ에 배포 및 RDS 마이그레이션을 통한 가용성 증가
 
+### 요약 비교
+- S3는 순수한 스토리지 비용에서 EBS 및 EFS보다 저렴
+- EBS 및 EFS는 S3보다 성능이 뛰어납니다.
+- EBS는 EC2 인스턴스의 볼륨으로 사용됩니다.
+- S3에는 EFS와 달리 파일에 대한 계층 구조가 없습니다.
+- S3에는 기본 제공 쿼리 기능이 있습니다.
+- S3는 모든 리전에서 PUTS 와  DELETES 덮어 쓰기게 대한 최종 일관성을 제공
+
+### S3 
 
 
 ## 보안 자격
