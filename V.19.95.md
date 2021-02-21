@@ -91,6 +91,7 @@
 19. AWS Fargate
     - EC2처럼 기본 인프라를 관리할 필요없이(`서버리스`) `컨테이너`를 배포하고 관리할 수 있는 기능
     - on-demand 최대 500
+    - 데이터를 처리
 
 
 20. AWS Transfer for SFTP
@@ -120,7 +121,7 @@
    - read only 
    - 몇개의 지역만에 아주 낮은 latency를 제공해야할때 사용
 
-25. Amazon Elastic Kubrenetes Service (AWS EKS)
+25. Amazon Elastic Kubernetes Service (AWS EKS)
    - 작동 및 유지 관리할 필요 없이 쿠버네티스는 컨테이너화된 애플리케이션의 배포, 조정 및 관리 자동화를 위한 `오픈소스 시스템`
    - 고가용성
    - 온프레미스, 클라우드 `상관없이` EKS에서 실행중인 애플리케이션은 표준 쿠버네티스로 쉽게 마이그레션 가능
@@ -199,6 +200,19 @@
 44. AWS Elastic Beanstalk 
    - 로드 밸런서
    - 신속하고 쉽게 배포 하고 관리 
+
+45. AWS Config
+   - 간편하고 쉽게 평가,감사 모니터링 가능
+
+46. bucket-owner-full-control
+   - 이정책을 부어하는 버캣을 만들어 S3버킷을 외부와 공유
+
+47. 임시파일을 저장하는 가장 빠른 저장옵션
+   - RAID0 를 사용하는 여러 인스턴스 스토어 볼륨
+
+48. EMR / Redshift
+   - Big data EMR, Redshift for analyzing
+
 
    
 ### Elastic Container Service (ECS)
@@ -385,6 +399,7 @@
 
 ### Amazon Aurora
 - 동적 오토 scaling 가능
+- 교차리전  빠른 복구 가능(1초 미만) 
 - 각각의 AZ에 2개의 카피를 가지고 있고 최소한 세개의 AZ를 가지고 있기 떄문에 6개의 카피의 데이터가 만들어진다고 볼 수 있다. (Highly Availability)
 - Performing table joins
 - Amazon Aurora Serverless
@@ -412,6 +427,7 @@
    - `비지니스 연속성`을 위해 데이터를 AWS에 복제 
 - AWS Storage Gateway (`확장`)
    - 무제한 클라우드 스토리에 대한 온 프레미스 엑세스를 제공
+   - 짧은 대기 시간과 엑세스 제공
    - `하이브리드 클라우드 스토리지`
 
 ### cloudfront
@@ -453,10 +469,14 @@
 ### AWS Shield
 - AWS에서 실행되는 웹 애플리케이션을 `DDoS` 공격으로부터 보호하는 관리형 서비스
 
+### Secret Manager
+- Lambda등 AWS서비스와 암호 ID가 저장된 Secret Manger 와 연결하여 암호를 여기서 검색하도록 하여 안전하게 저장하고 지속적으로 사용하도록 함
+
 ### Service Control policy
 - 계정의 모든 IAM 엔티티에 대한 중앙 액세스 제어를 제공
 - 개발자가 정의한 경계 내에서만 작동 할 수 있도록 하여 개발자가 자신의 권한을 더 자유롭게 관리
 - 루트를 자동으로 생성
+
 
 ## 분석
 ### AWS Glue
@@ -467,7 +487,7 @@
 ### Amazon Kinesis
 - `실시간 스트리밍 데이터`를 손쉽게 수집, 처리 분석할 수 잇으므로 적시에 통찰력을 확보하고 새로운 정보에 신속하게 대응
 - `모든 규모의 스트리밍 데이터`를 비용 효율적으로 처리할 수 있는 핵심 기능과 더불어 애플리케이션 요구 사항에 가장 적합한 도구를 선택할 수 있는 유연성 제공
-- Amazon kinesis Data `Firehose` 를 이용하여 `Amazon S3` 에 데이터 저장 가능
+- Amazon kinesis Data `Firehose` 를 이용하여 `Amazon S3` 에 데이터 저장 가능 (수집)
 - `Amazon Kinesis Data Streams`는 고도로 확장 가능하고 내구력 있는 실시간 데이터 스트리밍 서비스
     -  사용자 편의정 / 탄력성 / 저렴한 비용 / 실시간 성능 / 내구성 / 보안
 - UpdateShardCount 를 사용하여 스트림에 shards 수를 늘려 처리량을 높일 수 있다.
